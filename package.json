@@ -1,13 +1,20 @@
 {
-  "name": "refactoreddwgtojson",
-  "module": "index.ts",
-  "type": "module",
+  "name": "bbsteel-ai-agent",
+  "description": "Structural DWG extraction pipeline — converts AutoCAD .dwg files to structured JSON using LibreDWG and regex parsers",
+  "version": "1.0.0",
+  "author": "Buniyadbyte / BBSteel",
   "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "pipeline": "node main.js",
+    "pipeline:skip-convert": "node main.js --skip-convert",
+    "pipeline:regex-only": "node main.js --skip-convert --skip-extract --skip-clean",
+    "automate": "node automations.js",
+    "web": "cd web && bun run dev",
+    "web:build": "cd web && bun run build",
+    "web:start": "cd web && bun run start"
   },
   "dependencies": {
     "dirty-json": "^0.9.2",
@@ -16,5 +23,15 @@
     "selenium-webdriver": "^4.41.0",
     "stream-chain": "^3.6.0",
     "stream-json": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "engines": {
+    "bun": ">=1.3.0",
+    "node": ">=18.0.0"
   }
 }

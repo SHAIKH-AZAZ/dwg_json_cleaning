@@ -56,3 +56,24 @@ regexs/LegOfStrip/*.json
 regexs/slab/*.json
 regexs/Slab Bar/*.json
 regexs/Spacing/*.json
+
+# Pipeline temp & output files (can be very large)
+.tmp_pipeline/
+cleanjson/
+cleanjson/*.json
+regexDataExtraction/
+drawing_json_converted/
+web/.tmp_pipeline/
+web/cleanjson/
+
+# Next.js build output
+web/.next/
+web/out/
+
+# LibreDWG binary (large, platform-specific)
+web/src/lib/pipeline/libredwg-0.13.3.7852-win64/
+
+# Env files
+web/.env
+web/.env.local
+web/.env.production
