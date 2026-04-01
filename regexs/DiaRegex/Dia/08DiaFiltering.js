@@ -18,7 +18,7 @@ const outputPath = path.join(__dirname, "08DiaBar.json");
 const singleLabelRegex =
   /^\s*(?:(\d+L)-)?(Y)(\d+)\s*AT\s*(\d+)\s*C\/C\+?\s*$/i;
 
-function extractLabelsFromArray(arr) {
+export function extractDiaRegex8(arr) {
   let allMatches = [];
 
   for (const str of arr) {
@@ -26,8 +26,8 @@ function extractLabelsFromArray(arr) {
 
     if (match) {
       count++;
-      console.log(match);
-      
+      // console.log(match);
+
       allMatches.push([...match]); // same output structure as your previous regex
     }
   }
@@ -35,43 +35,3 @@ function extractLabelsFromArray(arr) {
   return allMatches;
 }
 
-const raw = fs.readFileSync(inputPath, "utf-8");
-const jsonArray = JSON.parse(raw);
-
-const result = extractLabelsFromArray(jsonArray);
-
-// Deduplicate
-const SeTresult = [
-  ...new Set(result.map(r => JSON.stringify(r)))
-].map(r => JSON.parse(r));
-
-// Save result
-fs.writeFileSync(outputPath, JSON.stringify(SeTresult, null, 2));
-
-console.log(
-  `✅ Done! Extracted labels saved to: ${outputPath} and count is 06DiaRegex ${count}`
-);
-
-/*
-Example Output
-
-Input: "2L-Y10 AT 100C/C"
-
-[
-  "2L-Y10 AT 100C/C",
-  "2L",
-  "Y",
-  "10",
-  "100"
-]
-
-Input: "Y8 AT 200C/C"
-
-[
-  "Y8 AT 200C/C",
-  undefined,
-  "Y",
-  "8",
-  "200"
-]
-*/

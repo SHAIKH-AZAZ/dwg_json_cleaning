@@ -141,7 +141,7 @@ function normalize(patternIndex, m) {
 // -------------------------------
 //  RUN MATCHES
 // -------------------------------
-function extractLabelsFromArray(arr) {
+export function extract(arr) {
   let out = [];
 
   for (const str of arr) {
@@ -160,16 +160,4 @@ function extractLabelsFromArray(arr) {
 
 // -------------------------------
 //  EXECUTE
-// -------------------------------
-const raw = fs.readFileSync(inputPath, "utf-8");
-const jsonArray = JSON.parse(raw);
-
-const result = extractLabelsFromArray(jsonArray);
-
-// REMOVE DUPLICATES
-const unique = [...new Set(result.map(r => JSON.stringify(r)))]
-  .map(v => JSON.parse(v));
-
-fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
-
-console.log(`✅ Extracted ${unique.length} bar dia labels -> ${outputPath}`);
+// -------------------------------

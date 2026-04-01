@@ -8,6 +8,7 @@ import { convertDWGToJSON } from "./steps/convertDwgToJson.js";
 import { extractTextsFromJsonFolder } from "./steps/extractTexts.js";
 import { cleanLargeJsonArray } from "./steps/cleanLargeJsonArray.js";
 import { extractBeamElements } from "./regexDataExtraction/Beam/extractBeamElements.js";
+import { runExtractionRegex } from "./regexs/main.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,7 +25,7 @@ const REGEX_DATA_OUT = arg(
 const SKIP_CONVERT = process.argv.includes("--skip-convert");
 const SKIP_EXTRACT = process.argv.includes("--skip-extract");
 const SKIP_CLEAN = process.argv.includes("--skip-clean");
-const SKIP_BEAM = process.argv.includes("--skip-beam");
+const SKIP_REGEX = process.argv.includes("--skip-regex");
 
 const DEDUPE = process.argv.includes("--dedupe");
 const DEDUPE_CAP = Number(arg("--dedupe-cap", "1500000"));
@@ -79,9 +80,11 @@ async function main() {
     console.log(stats);
   }
 
-  if (!SKIP_BEAM) {
-    const beamStats = await extractBeamElements(CLEAN_OUT, REGEX_DATA_OUT);
-    console.log(`Extracted ${beamStats.totalMatches} beam labels to ${beamStats.outputPath}`);
+  
+  if (!SKIP_REGEX) {
+    runExtractionRegex();
+    console.log(`Done data extraction  `);
+    
   }
 
   console.log("Pipeline completed.");

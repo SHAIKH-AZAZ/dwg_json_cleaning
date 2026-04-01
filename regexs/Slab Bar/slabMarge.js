@@ -28,7 +28,7 @@ const regex3 = /^\s*([6-9]|[1-3][0-9]|40)\s*@\s*(\d+)\s*(?:c\/c|C\/C|["\']?\s*c\
  */
 function normalizeMatch(match, type) {
   if (!match) return null;
-  
+
   if (type === 'regex1') {
     // Groups: slabType, symbol, diameter, spacing
     return [
@@ -57,7 +57,7 @@ function normalizeMatch(match, type) {
       match[2]    // spacing
     ];
   }
-  
+
   return null;
 }
 
@@ -66,7 +66,7 @@ function normalizeMatch(match, type) {
  * @param {string[]} arr - Array of input strings
  * @returns {Array[]} all matches
  */
-function extractLabelsFromArray(arr) {
+export function extract(arr) {
   let allMatches = [];
 
   for (const str of arr) {
@@ -78,7 +78,7 @@ function extractLabelsFromArray(arr) {
     if (match) {
       normalized = normalizeMatch(match, 'regex1');
       if (normalized) {
-        console.log(normalized);
+        // console.log(normalized);
         allMatches.push(normalized);
         continue;
       }
@@ -89,7 +89,7 @@ function extractLabelsFromArray(arr) {
     if (match) {
       normalized = normalizeMatch(match, 'regex2');
       if (normalized) {
-        console.log(normalized);
+        // console.log(normalized);
         allMatches.push(normalized);
         continue;
       }
@@ -100,7 +100,7 @@ function extractLabelsFromArray(arr) {
     if (match) {
       normalized = normalizeMatch(match, 'regex3');
       if (normalized) {
-        console.log(normalized);
+        // console.log(normalized);
         allMatches.push(normalized);
       }
     }
@@ -109,14 +109,3 @@ function extractLabelsFromArray(arr) {
   return allMatches;
 }
 
-// ✅ Load JSON
-const raw = fs.readFileSync(inputPath, "utf-8");
-const jsonArray = JSON.parse(raw);
-
-// ✅ Extract all matches into one array
-const result = extractLabelsFromArray(jsonArray);
-
-// ✅ Save filtered result
-fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
-
-console.log(`✅ Done! Extracted ${result.length} labels saved to: ${outputPath}`);

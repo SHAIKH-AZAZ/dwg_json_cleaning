@@ -1,15 +1,3 @@
-// 05 
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-// Allow __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// ✅ Path to your JSON file
-const inputPath = path.join(__dirname, "../../cleaned_texts.json");
-const outputPath = path.join(__dirname, "01DiaBar.json");
 
 // ✅ Regex that handles both cases: "10-12TOR" and "15Ø"
 const singleLabelRegex =
@@ -21,7 +9,7 @@ const singleLabelRegex =
  */
 function normalizeMatch(m) {
   if (!m) return null;
-  console.log(m);
+  // console.log(m);
   
   // Case 1: range (10-12TOR)
   if (m[1]) {
@@ -39,7 +27,7 @@ function normalizeMatch(m) {
  * @param {string[]} arr - Array of input strings
  * @returns {string[]} all matches
  */
-function extractLabelsFromArray(arr) {
+export function extractDiaRegex1(arr) {
   let allMatches = [];
 
   for (const str of arr) {
@@ -54,18 +42,3 @@ function extractLabelsFromArray(arr) {
   return allMatches;
 }
 
-// ✅ Load JSON
-const raw = fs.readFileSync(inputPath, "utf-8");
-const jsonArray = JSON.parse(raw);
-
-// ✅ Extract all matches into one array
-const result = extractLabelsFromArray(jsonArray);
-
-// ✅ Save filtered result
-fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
-
-console.log(`✅ Done! Extracted labels saved to: ${outputPath}`);
-
-/**
- * [ '2-12T', '2', '12', 'T' ]
- */

@@ -1,15 +1,3 @@
-// 05
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-// Allow __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-let count = 0 ;
-// ✅ Path to your JSON file
-const inputPath = path.join(__dirname, "../cleaned_texts.json");
-const outputPath = path.join(__dirname, "SpacingTable.json");
 
 // ✅ Regex for labels (word boundary + global search)
 const singleLabelRegex =/^\s*(\d+)\s*(?:mm\s*)?C\/C\s*$/i;
@@ -22,8 +10,9 @@ const singleLabelRegex =/^\s*(\d+)\s*(?:mm\s*)?C\/C\s*$/i;
  * @param {string[]} arr - Array of input strings
  * @returns {string[]} all matches
  */
-function extractLabelsFromArray(arr) {
+export function extractSpacingTable(arr) {
   let allMatches = [];
+  let count = 0;
 
   for (const str of arr) {
     let match;
@@ -43,14 +32,3 @@ function extractLabelsFromArray(arr) {
   return allMatches;
 }
 
-// ✅ Load JSON
-const raw = fs.readFileSync(inputPath, "utf-8");
-const jsonArray = JSON.parse(raw);
-
-// ✅ Extract all matches into one array
-const result = extractLabelsFromArray(jsonArray);
-
-// ✅ Save filtered result
-fs.writeFileSync(outputPath, JSON.stringify(result.sort(), null, 2));
-
-console.log(`✅ Done! Extracted labels saved to: ${outputPath} with this matches of Spacing regex  ${count}`);

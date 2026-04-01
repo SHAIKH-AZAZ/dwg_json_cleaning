@@ -40,3 +40,19 @@ libredwg-0.13.3.7852-win64/*
 
 drawing_json_converted
 drawing_json_converted/*
+Beam/*.json
+Column/*.json
+ColumnXY/*.json
+ColomnXY/*.json
+ColumnDia/*.json
+CoverofConcrete/*.json
+DiaRegex/**/*.json
+Footing/*.json
+Footing Bar/*.json
+Footing Raft/*.json
+GradeOfConcrete/*.json
+GradeOfSteel/*.json
+regexs/LegOfStrip/*.json
+regexs/slab/*.json
+regexs/Slab Bar/*.json
+regexs/Spacing/*.json

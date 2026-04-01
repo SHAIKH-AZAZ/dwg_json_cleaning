@@ -11,7 +11,7 @@ const singleLabelRegex =
   /^\s*(\d+L)\s*-\s*([TØY]|TOR)\s*(\d+)(?:[-@]\s*(\d+))?(?:\s*C\/C)?\s*$/i;
 
 
-function extractLabelsFromArray(arr) {
+export function extractDiaRegex6(arr) {
   let allMatches = [];
   
   for (const str of arr) {
@@ -26,28 +26,3 @@ function extractLabelsFromArray(arr) {
   return allMatches;
 }
 
-const raw = fs.readFileSync(inputPath, "utf-8");
-const jsonArray = JSON.parse(raw);
-
-const result = extractLabelsFromArray(jsonArray);
-
-// ✅ Proper deduplication
-const SeTresult = [
-  ...new Set(result.map(r => JSON.stringify(r)))
-].map(r => JSON.parse(r));
-
-// ✅ Save
-fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
-
-console.log(`✅ Done! Extracted labels saved to: ${outputPath} and count is 06DiaRegex ${count}`);
-
-
-/**
- [
-  '4-16Y-100 C/C ',
-  4, -> number 
-  16, -> bar dia 
-'Y', -> special symbol
-100, spacing 
-]
- */

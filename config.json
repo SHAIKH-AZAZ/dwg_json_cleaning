@@ -1,0 +1,14 @@
+{
+  "baseUrl": "https://dev.app.bbsteel.in",
+  "email": "azaz.waste@test.com",
+  "password": "1234",
+  "projectName": "test",
+  "importName": "test import",
+  "drgNo": "DRG-001",
+  "structureName": "Main Structure",
+  "timeout": 10000,
+  "uploadTimeout": 20000,
+  "shortDelay": 100,
+  "mediumDelay": 200,
+  "longDelay": 500
+}

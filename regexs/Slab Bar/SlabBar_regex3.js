@@ -42,7 +42,7 @@ function extractLabelsFromArray(arr) {
     const match = str.match(singleLabelRegex);
     if (match) {
       const normalized = normalizeMatch(match);
-      console.log(normalized);
+      // console.log(normalized);
       allMatches.push(normalized);
     }
   }

@@ -20,7 +20,7 @@ const singleLabelRegex = /^\s*([6-9]|[1-3][0-9]|40)\s*(TOR|[YTOØ])\s*[@-]?\s*(\
  */
 function normalizeMatch(match) {
   if (!match) return null;
-  
+
   return [
     match[0],      // full match
     undefined,     // no slabType
@@ -42,7 +42,7 @@ function extractLabelsFromArray(arr) {
     const match = str.match(singleLabelRegex);
     if (match) {
       const normalized = normalizeMatch(match);
-      console.log(normalized);
+      // console.log(normalized);
       allMatches.push(normalized);
     }
   }

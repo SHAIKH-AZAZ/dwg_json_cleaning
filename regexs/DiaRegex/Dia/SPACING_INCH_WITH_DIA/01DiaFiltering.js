@@ -1,20 +1,9 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-let count = 0;
-
-const inputPath = path.join(__dirname, "../../../cleaned_texts.json");
-const outputPath = path.join(__dirname, "01DiaBar_INCH_SPACING.json");
 
 const singleLabelRegex =
   /^\s*(?:(\d+L)-)?([TØY]|TOR)\s*(\d+)\s*[@-]\s*(\d+)\s*IN\s*(?:C\/C\b.*)?$/i;
 
 
-function extractLabelsFromArray(arr) {
+export function extractInchSpacingDia01(arr) {
   let allMatches = [];
 
   for (const str of arr) {
@@ -27,19 +16,4 @@ function extractLabelsFromArray(arr) {
 
   return allMatches;
 }
-
-const raw = fs.readFileSync(inputPath, "utf-8");
-const jsonArray = JSON.parse(raw);
-
-const result = extractLabelsFromArray(jsonArray);
-
-// ✅ Proper deduplication
-const SeTresult = [
-  ...new Set(result.map(r => JSON.stringify(r)))
-].map(r => JSON.parse(r));
-
-// ✅ Save
-fs.writeFileSync(outputPath, JSON.stringify(result, null, 2));
-
-console.log(`✅ Done! Extracted labels saved to: ${outputPath} with matched ${count}`);
 

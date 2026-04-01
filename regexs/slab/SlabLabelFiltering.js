@@ -1,16 +1,4 @@
 
-// 05 
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
-
-// Allow __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// ✅ Path to your JSON file
-const inputPath = path.join(__dirname, "../cleaned_texts.json");
-const outputPath = path.join(__dirname, "SlabLabels.json");
 
 // ✅ Regex for labels (word boundary + global search)
 const singleLabelRegex = /^\s*S(?=[A-Z0-9]*\d)[A-Z0-9]+\s*$/i;
@@ -22,33 +10,22 @@ const singleLabelRegex = /^\s*S(?=[A-Z0-9]*\d)[A-Z0-9]+\s*$/i;
  * @param {string[]} arr - Array of input strings
  * @returns {string[]} all matches
  */
-function extractLabelsFromArray(arr) {
+export function extractSlabLabels(arr) {
   let allMatches = [];
 
   for (const str of arr) {
     let match;
-    
+
     match = str.match(singleLabelRegex)
     if (!(match == null)) {
-      console.log(match);
+      // console.log(match);
       allMatches.push(match);
 
     }
-    
+
     singleLabelRegex.lastIndex = 0; // reset regex
   }
 
   return allMatches;
 }
 
-// ✅ Load JSON
-const raw = fs.readFileSync(inputPath, "utf-8");
-const jsonArray = JSON.parse(raw);
-
-// ✅ Extract all matches into one array
-const result = extractLabelsFromArray(jsonArray);
-
-// ✅ Save filtered result
-fs.writeFileSync(outputPath, JSON.stringify(result.sort(), null, 2));
-
-console.log(`✅ Done! Extracted labels saved to: ${outputPath}`);
