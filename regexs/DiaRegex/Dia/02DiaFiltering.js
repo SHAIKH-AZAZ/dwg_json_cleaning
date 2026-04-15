@@ -1,8 +1,8 @@
 
 let count = 0;
 
-// ✅ Regex for labels (word boundary + global search)
-const singleLabelRegex = /\b(\d+)\s*[-±,]?\s*([YTØ#]|TOR)\s*(\d+)\b/;
+// Exact single count-dia labels like 2-T20 or 3T16.
+const singleLabelRegex = /^(\d+)\s*[-±,]?\s*([YTØ#]|TOR)\s*(\d+)$/;
 /**
  * Extracts labels from an array of strings and flattens into single array
  * @param {string[]} arr - Array of input strings

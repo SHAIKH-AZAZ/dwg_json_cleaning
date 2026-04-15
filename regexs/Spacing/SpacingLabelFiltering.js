@@ -5,7 +5,7 @@ const singleLabelRegex =
 
  // added "-" and "@" support for extraction 
 // /^(.*?)\b(Y|T|Ø|TOR)\s*(\d+)?\s*((?:\s*(?:\+\s*)?\d*\s*@\s*\d+)+)\s*(?:C\/C)?$/i
-
+  // 2L - T8-300   , 5    
 /**
  * Extracts labels from an array of strings and flattens into single array
  * @param {string[]} arr - Array of input strings
