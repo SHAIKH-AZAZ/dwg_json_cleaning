@@ -19,6 +19,7 @@ const CATEGORY_META: Record<string, { icon: string; color: string; label: string
   "06DiaBar.json":              { icon: "🔩", color: "#60a5fa", label: "Dia Bar #6" },
   "07DiaBar.json":              { icon: "🔩", color: "#60a5fa", label: "Dia Bar #7" },
   "08DiaBar.json":              { icon: "🔩", color: "#60a5fa", label: "Dia Bar #8" },
+  "09DiaBar.json":              { icon: "🔩", color: "#60a5fa", label: "Dia Bar #9" },
   "FootingLabel.json":          { icon: "🏗️", color: "#2dd4bf", label: "Footing Labels" },
   "FootingBar.json":            { icon: "🏗️", color: "#2dd4bf", label: "Footing Bar" },
   "FootingRaft.json":           { icon: "🏗️", color: "#2dd4bf", label: "Footing Raft" },
