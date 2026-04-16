@@ -22,7 +22,7 @@ import { extractFooting } from "./Footing/FootingLabelFiltering.js";
 import { extractFootingBar } from "./Footing Bar/FootingBaRLabelFiltering.js";
 import { extractFootingRaft } from "./Footing Raft/FootingRaftLabelFiltering.js";
 import { extractGradeOfConcrete } from "./GradeOfConcrete/GradeOfConcrete.js";
-import { extractSteekOfGrade } from "./GradeOfSteel/SteekGradeFiltering.js";
+import { extractSteekOfGrade } from "./GradeOfSteel/SteetGradeFiltering.js";
 import { extractLegOfStirrup } from "./LegOfStrip/LegStirrup.js";
 import { extractSlabLabels } from "./slab/SlabLabelFiltering.js";
 import { extractSpacingLabelFiltering } from "./Spacing/SpacingLabelFiltering.js";
