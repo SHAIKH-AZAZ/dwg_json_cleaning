@@ -7,7 +7,7 @@ const singleLabelRegex = /\bFe\s*:?\s*(\d+)([A-Za-z]?)\b:*/i;
  * @param {string[]} arr - Array of input strings
  * @returns {string[]} all matches cleaned
  */
-export function extractSteekOfGrade(arr) {
+export function extractSteelOfGrade(arr) {
   const allMatches = [];
 
   for (const str of arr) {

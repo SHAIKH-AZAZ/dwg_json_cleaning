@@ -22,7 +22,7 @@ import { extractFooting } from "./Footing/FootingLabelFiltering.js";
 import { extractFootingBar } from "./Footing Bar/FootingBaRLabelFiltering.js";
 import { extractFootingRaft } from "./Footing Raft/FootingRaftLabelFiltering.js";
 import { extractGradeOfConcrete } from "./GradeOfConcrete/GradeOfConcrete.js";
-import { extractSteekOfGrade } from "./GradeOfSteel/SteetGradeFiltering.js";
+import { extractSteelOfGrade } from "./GradeOfSteel/SteelGradeFiltering.js";
 import { extractLegOfStirrup } from "./LegOfStrip/LegStirrup.js";
 import { extractSlabLabels } from "./slab/SlabLabelFiltering.js";
 import { extractSpacingLabelFiltering } from "./Spacing/SpacingLabelFiltering.js";
@@ -65,7 +65,7 @@ export function runExtractionRegex(customInputPath = "../cleanjson/cleaned_texts
       { name: "./Footing Bar/FootingBar.json", data: extractFootingBar(inputArray) },
       { name: "./Footing Raft/FootingRaft.json", data: extractFootingRaft(inputPath) },
       { name: "./GradeOfConcrete/GradeOfConcrete.json", data: extractGradeOfConcrete(inputArray) },
-      { name: "./GradeOfSteel/GradeOfSteel.json", data: extractSteekOfGrade(inputArray) },
+      { name: "./GradeOfSteel/GradeOfSteel.json", data: extractSteelOfGrade(inputArray) },
       { name: "./LegOfStrip/LegOfStirrup.json", data: extractLegOfStirrup(inputArray) },
       { name: "./slab/SlabLabels.json", data: extractSlabLabels(inputArray) },
       { name: "./Spacing/SpacingLabels.json", data: extractSpacingLabelFiltering(inputArray) },
