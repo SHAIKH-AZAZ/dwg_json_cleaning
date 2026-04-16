@@ -1,6 +1,6 @@
 
-// Regex to match Fe + number (ignore any extra letters or spaces)
-const singleLabelRegex = /\bFe\s*:?\s*(\d+)\b:*/i;
+// Match Fe + number + optional letter (like D)
+const singleLabelRegex = /\bFe\s*:?\s*(\d+)([A-Za-z]?)\b:*/i;
 
 /**
  * Extracts labels from an array of strings
@@ -13,14 +13,11 @@ export function extractSteekOfGrade(arr) {
   for (const str of arr) {
     const match = str.match(singleLabelRegex);
     if (match) {
-      // console.log(match);
-
-      // Combine "Fe" + number only, ignore spaces/extra letters
-      const label = `Fe${match[1]}`;
+      // Combine Fe + number + optional letter
+      const label = `Fe${match[1]}${match[2] || ""}`;
       allMatches.push(label);
     }
   }
 
   return Array.from(new Set(allMatches)).sort();
 }
-

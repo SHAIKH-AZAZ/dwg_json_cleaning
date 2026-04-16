@@ -71,6 +71,7 @@ export function runExtractionRegex(customInputPath = "../cleanjson/cleaned_texts
       { name: "./Spacing/SpacingLabels.json", data: extractSpacingLabelFiltering(inputArray) },
       { name: "./Spacing/SpacingTable_INCH.json", data: extractSpacingTableInch(inputArray) },
       { name: "./Spacing/SpacingTable.json", data: extractSpacingTable(inputArray) },
+      { name: "./GradeOfSteel/GradeOfStell.json", data:extractSteekOfGrade(inputArray)  }
     ];
 
     // Files writing omitted for web app, data is returned directly instead.
