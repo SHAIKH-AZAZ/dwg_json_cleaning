@@ -1,5 +1,19 @@
 [
   [
+    "T8 - 150 C/C",
+    null,
+    "T",
+    "8",
+    "- 150 "
+  ],
+  [
+    "T8 - 275 C/C",
+    null,
+    "T",
+    "8",
+    "- 275 "
+  ],
+  [
     "T8@125C/C(ALL)",
     null,
     "T",
@@ -21824,194 +21838,5 @@
     "T",
     "8",
     "@200"
-  ],
-  [
-    "T12@100C/C",
-    null,
-    "T",
-    "12",
-    "@100"
-  ],
-  [
-    "T10-150C/C HORI.R/F",
-    null,
-    "T",
-    "10",
-    "-150"
-  ],
-  [
-    "T10-150C/C VER.R/F",
-    null,
-    "T",
-    "10",
-    "-150"
-  ],
-  [
-    "T10-150C/C HORI.R/F",
-    null,
-    "T",
-    "10",
-    "-150"
-  ],
-  [
-    "T10-150C/C VER.R/F",
-    null,
-    "T",
-    "10",
-    "-150"
-  ],
-  [
-    "T8@150C/C",
-    null,
-    "T",
-    "8",
-    "@150"
-  ],
-  [
-    "T10@100C/C",
-    null,
-    "T",
-    "10",
-    "@100"
-  ],
-  [
-    "T10@100C/C",
-    null,
-    "T",
-    "10",
-    "@100"
-  ],
-  [
-    "T12@100C/C",
-    null,
-    "T",
-    "12",
-    "@100"
-  ],
-  [
-    "T10@100C/C",
-    null,
-    "T",
-    "10",
-    "@100"
-  ],
-  [
-    "T8 @ 100 c/c BOTTOM THRU MESH.",
-    null,
-    "T",
-    "8",
-    "@ 100 "
-  ],
-  [
-    "T8 @ 200 c/c TOP THRU MESH.",
-    null,
-    "T",
-    "8",
-    "@ 200 "
-  ],
-  [
-    "T10 @ 100 c/c BOTTOM THRU MESH.",
-    null,
-    "T",
-    "10",
-    "@ 100 "
-  ],
-  [
-    "T8@100C/C",
-    null,
-    "T",
-    "8",
-    "@100"
-  ],
-  [
-    "T8@100C/C",
-    null,
-    "T",
-    "8",
-    "@100"
-  ],
-  [
-    "T10 @ 200 c/c EXTRA TOP ALT.WITH THRU MESH.",
-    null,
-    "T",
-    "10",
-    "@ 200 "
-  ],
-  [
-    "T10 @ 100 c/c TOP THRU MESH.",
-    null,
-    "T",
-    "10",
-    "@ 100 "
-  ],
-  [
-    "T8 @ 100 c/c BOTTOM THRU MESH.",
-    null,
-    "T",
-    "8",
-    "@ 100 "
-  ],
-  [
-    "T8 @ 200 c/c TOP THRU MESH.",
-    null,
-    "T",
-    "8",
-    "@ 200 "
-  ],
-  [
-    "T10 @ 100 c/c BOTTOM THRU MESH.",
-    null,
-    "T",
-    "10",
-    "@ 100 "
-  ],
-  [
-    "T10 @ 200 c/c EXTRA TOP ALT.WITH THRU MESH.",
-    null,
-    "T",
-    "10",
-    "@ 200 "
-  ],
-  [
-    "T10 @ 100 c/c TOP THRU MESH.",
-    null,
-    "T",
-    "10",
-    "@ 100 "
-  ],
-  [
-    "T8 @ 100 c/c BOTTOM THRU MESH.",
-    null,
-    "T",
-    "8",
-    "@ 100 "
-  ],
-  [
-    "T8 @ 200 c/c TOP THRU MESH.",
-    null,
-    "T",
-    "8",
-    "@ 200 "
-  ],
-  [
-    "T10 @ 100 c/c BOTTOM THRU MESH.",
-    null,
-    "T",
-    "10",
-    "@ 100 "
-  ],
-  [
-    "T10 @ 200 c/c EXTRA TOP ALT.WITH THRU MESH.",
-    null,
-    "T",
-    "10",
-    "@ 200 "
-  ],
-  [
-    "T10 @ 100 c/c TOP THRU MESH.",
-    null,
-    "T",
-    "10",
-    "@ 100 "
   ]
 ]
