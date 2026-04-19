@@ -18,6 +18,7 @@ import { extractDiaRegex6 } from "./DiaRegex/Dia/06DiaFiltering.js";
 import { extractDiaRegex7 } from "./DiaRegex/Dia/07DiaFiltering.js";
 import { extractDiaRegex8 } from "./DiaRegex/Dia/08DiaFiltering.js";
 import { extractDiaRegex9 } from "./DiaRegex/Dia/09DiaFiltering.js";
+import { extractDiaRegex10 } from "./DiaRegex/Dia/10DiaFiltering.js";
 import { extractFooting } from "./Footing/FootingLabelFiltering.js";
 import { extractFootingBar } from "./Footing Bar/FootingBaRLabelFiltering.js";
 import { extractFootingRaft } from "./Footing Raft/FootingRaftLabelFiltering.js";
@@ -61,6 +62,7 @@ export function runExtractionRegex(customInputPath = "../cleanjson/cleaned_texts
       { name: "./DiaRegex/Dia/07DiaBar.json", data: extractDiaRegex7(inputArray) },
       { name: "./DiaRegex/Dia/08DiaBar.json", data: extractDiaRegex8(inputArray) },
       { name: "./DiaRegex/Dia/09DiaBar.json", data: extractDiaRegex9(inputArray) },
+      { name: "./DiaRegex/Dia/10DiaBar.json", data: extractDiaRegex10(inputArray) },
       { name: "./Footing/FootingLabel.json", data: extractFooting(inputArray) },
       { name: "./Footing Bar/FootingBar.json", data: extractFootingBar(inputArray) },
       { name: "./Footing Raft/FootingRaft.json", data: extractFootingRaft(inputPath) },
