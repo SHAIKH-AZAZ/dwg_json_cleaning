@@ -12,6 +12,17 @@ export function runDwgRead(dwgreadExe, args) {
             else reject(new Error(`Process exited with code ${code}`));
         });
 
-        child.on("error", reject);
+        child.on("error", (error) => {
+            if (error.code === "ENOENT") {
+                reject(
+                    new Error(
+                        `Unable to start dwgread command "${dwgreadExe}". Ensure it is installed on PATH or set DWGREAD_PATH.`
+                    )
+                );
+                return;
+            }
+
+            reject(error);
+        });
     });
 }

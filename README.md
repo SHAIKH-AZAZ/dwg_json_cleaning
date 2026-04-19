@@ -39,10 +39,11 @@ bbsteel ai agent/
 | Requirement | Version | Notes |
 |---|---|---|
 | [Bun](https://bun.sh) | v1.3+ | JavaScript runtime & package manager |
-| Windows OS | 64-bit | Required for `dwgread.exe` (LibreDWG) |
+| Windows OS | 64-bit | Optional if you want to use the bundled `dwgread.exe` |
 | Node.js | v18+ | Optional, Bun handles everything |
+| LibreDWG `dwgread` | In `PATH` on Linux/macOS | Required for extraction on non-Windows systems |
 
-> **Note:** `dwgread.exe` (included in `libredwg-0.13.3.7852-win64/`) is a Windows-only binary. Linux/macOS users need to compile LibreDWG from source.
+> **Note:** `dwgread.exe` (included in `libredwg-0.13.3.7852-win64/`) is Windows-only. On Linux/macOS, install `dwgread` system-wide and keep it on `PATH`, or point `DWGREAD_PATH` / `--exe` to the binary.
 
 ---
 
@@ -111,13 +112,19 @@ Copy your `.dwg` files into the `Dwg_drawing/` folder.
 node main.js
 ```
 
+On Linux/macOS, the CLI now defaults to `dwgread` from your system `PATH`. If your binary is installed elsewhere, set it explicitly:
+
+```bash
+DWGREAD_PATH=/absolute/path/to/dwgread node main.js
+```
+
 #### CLI Flags
 
 | Flag | Default | Description |
 |---|---|---|
 | `--dwg <path>` | `./Dwg_drawing` | Input folder with `.dwg` files |
 | `--json <path>` | `./drawing_json_converted` | Output folder for raw JSON |
-| `--exe <path>` | `./libredwg-.../dwgread.exe` | Path to LibreDWG executable |
+| `--exe <path>` | Windows: bundled `dwgread.exe`, Linux/macOS: `dwgread` | Path or command for the LibreDWG executable |
 | `--clean-out <path>` | `./cleanjson/cleaned_texts.json` | Cleaned text output |
 | `--regex-out <path>` | `./regexDataExtraction/regexData.json` | Final structured output |
 | `--skip-convert` | — | Skip DWG → JSON conversion |

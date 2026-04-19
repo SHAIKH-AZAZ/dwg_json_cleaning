@@ -3,6 +3,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import { arg } from "./utils/arg.js";
+import {
+  getDefaultDwgReadPath,
+  isConfiguredDwgReadAvailable
+} from "./utils/getDwgReadPath.js";
 import { findDWGFiles } from "./utils/findDWGFiles.js";
 import { convertDWGToJSON } from "./steps/convertDwgToJson.js";
 import { extractTextsFromJsonFolder } from "./steps/extractTexts.js";
@@ -15,7 +19,7 @@ const __dirname = path.dirname(__filename);
 
 const DWG_DIR = arg("--dwg", path.join(__dirname, "Dwg_drawing"));
 const JSON_DIR = arg("--json", path.join(__dirname, "drawing_json_converted"));
-const EXE_PATH = arg("--exe", path.join(__dirname, "libredwg-0.13.3.7852-win64", "dwgread.exe"));
+const DWGREAD_CMD = arg("--exe", getDefaultDwgReadPath(__dirname));
 const CLEAN_OUT = arg("--clean-out", path.join(__dirname, "cleanjson", "cleaned_texts.json"));
 const REGEX_DATA_OUT = arg(
   "--regex-out",
@@ -41,22 +45,25 @@ fs.mkdirSync(path.dirname(REGEX_DATA_OUT), { recursive: true });
 
 async function main() {
   if (!SKIP_CONVERT) {
-    const exeOk = fs.existsSync(EXE_PATH);
+    const exeOk = isConfiguredDwgReadAvailable(DWGREAD_CMD);
     const dwgOk = fs.existsSync(DWG_DIR) && fs.lstatSync(DWG_DIR).isDirectory();
 
     if (!exeOk || !dwgOk) {
-      console.error("Invalid path for dwgread.exe or DWG folder. Use --exe and --dwg.");
+      console.error(
+        `Invalid dwgread command or DWG folder. dwgread="${DWGREAD_CMD}". Use --exe, DWGREAD_PATH, and --dwg.`
+      );
       process.exit(1);
     }
   }
 
   if (!SKIP_CONVERT) {
+    console.log(`Using dwgread: ${DWGREAD_CMD}`);
     const files = await findDWGFiles(DWG_DIR);
 
     if (files.length === 0) {
       console.warn("No DWG files found; skipping conversion.");
     } else {
-      await convertDWGToJSON(files, JSON_DIR, EXE_PATH, CONCURRENCY);
+      await convertDWGToJSON(files, JSON_DIR, DWGREAD_CMD, CONCURRENCY);
     }
   }
 
