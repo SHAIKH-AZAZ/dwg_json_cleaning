@@ -1,7 +1,7 @@
 
 // ✅ Regex for labels (word boundary + global search)
 const singleLabelRegex =
-  /^(.*?)\b(Y|T|Ø|TOR)\s*(\d+)?\s*((?:\s*(?:\+\s*)?\d*\s*[-@]\s*\d+)+)\s*(?:C\/C)?$/;
+  /^(.*?)\b(Y|T|Ø|TOR)\s*(\d+)?\s*((?:\s*(?:\+\s*)?\d*\s*(?:[-@]|AT)\s*\d+)+)\s*(?:C\/C)?$/;
 
  // added "-" and "@" support for extraction 
 // /^(.*?)\b(Y|T|Ø|TOR)\s*(\d+)?\s*((?:\s*(?:\+\s*)?\d*\s*@\s*\d+)+)\s*(?:C\/C)?$/i

@@ -2,10 +2,13 @@ import fs from "node:fs/promises";
 
 import { extractSteelOfGrade } from "./regexs/GradeOfSteel/SteelGradeFiltering.js";
 import { cleanText } from "./utils/cleanText.js";
+// import { extractColumLabels } from "./regexs/Column/ColomLabelFiltering.js";
+import { extractSpacingLabelFiltering } from "./regexs/Spacing/SpacingLabelFiltering.js";
+
 
 async function readJSON() {
   try {
-    const data = await fs.readFile("./drawing_json_converted/entityMtextText.json", "utf-8");
+    const data = await fs.readFile("./cleanjson/cleaned_texts.json", "utf-8");
     const jsonData = JSON.parse(data);
     const inputArray = Array.isArray(jsonData) ? jsonData : Object.values(jsonData);
 
@@ -28,21 +31,21 @@ async function run() {
   const inputArray = Array.isArray(jsonData) ? jsonData : Object.values(jsonData);
 
   // 🔹 Add direct test cases here
-  const testInputs = [
-    "Fe550",
-    "Fe525D",
-    "Fe 500",
-    "Fe400",
-    "Fe-415",
-    "Random text Fe550D extra",
-    "Fe432A"
-  ];
+  // const testInputs = [
+  //   "Fe550",
+  //   "Fe525D",
+  //   "Fe 500",
+  //   "Fe400",
+  //   "Fe-415",
+  //   "Random text Fe550D extra",
+  //   "Fe432A"
+  // ];
 
   // Merge file data + test data
-  const combinedInput = [...testInputs];
+  // const combinedInput = [...testInputs];
 
-  const cleanedTexts = combinedInput.map(cleanText);
-  const result = extractSteelOfGrade(cleanedTexts);
+  // const cleanedTexts = combinedInput.map(cleanText);
+  const result = extractSpacingLabelFiltering(inputArray);
 
   console.log("Final Result:" , result.map(item => {console.log(item);
   }));

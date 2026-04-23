@@ -1,7 +1,7 @@
 
 // Regex for column labels
 const singleLabelRegex =
-  /\b(?:[A-Z]{1,3}-)?(?:ASW|BSW|SW|LW|AC|GC|BC|CP|NC|SC|PC|RW|TW|TA-C|TB-C|TC-C|P|C|R|W)-?\d+(?:[A-Z]+)?(?:-\d+)?\b/gi;
+  /\b(?:[A-Z]{1,3}-)?(?:ASW|BSW|SW|LW|AC|GC|BC|CP|NC|SC|PC|RW|TW|TA-C|TB-C|TC-C|P|C|R|W|PX)-?\d+(?:[A-Z]+)?(?:-\d+)?\b/gi;
   // note that , this regex will return  array of string ....
 
 /**
