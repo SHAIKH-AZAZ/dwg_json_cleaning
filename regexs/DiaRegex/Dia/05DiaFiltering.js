@@ -1,29 +1,17 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import { DiaRegex5V3 } from "../RegexData.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const inputPath = path.join(__dirname, "../../cleaned_texts.json");
-const outputPath = path.join(__dirname, "05DiaBar.json");
-const singleLabelRegex = /^(?:(\d+)-)?(\d+)(TOR|T|Y|Φ)(?:[-@])(\d+)((?:\+\d+)*)(?:\s*C\/C)?$/i;
-
-let count = 0;
+// 2-12T-150 (dia before symbol, with spacing)
+const singleLabelRegex = DiaRegex5V3;
 
 export function extractDiaRegex5(arr) {
   let allMatches = [];
 
   for (const str of arr) {
-    const match = str.match(singleLabelRegex)
-    if (match) {
-      // console.log(match);
-      count++;
-      // console.log(count)
+    const match = str.match(singleLabelRegex);
+    if (match && match[2]) {
       allMatches.push([...match]);
     }
   }
 
   return allMatches;
 }
-

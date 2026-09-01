@@ -1,16 +1,14 @@
+import { DiaRegex1V3 } from "../RegexData.js";
 
-// ✅ Regex that handles both cases: "10-12TOR" and "15Ø"
-const singleLabelRegex =
-  /^(?:(\d+)\s*-\s*(\d+)\s*([YTØ#]|TOR)|(\d+)\s*([YTØ#]|TOR))$/;
+// Handles both "10-12TOR" and "15Ø"
+const singleLabelRegex = DiaRegex1V3;
 
 /**
- *  4T "4th bar timgs"
  * Normalize regex result into [ full, bar, dia, symbol ]
  */
 function normalizeMatch(m) {
   if (!m) return null;
-  // console.log(m);
-  
+
   // Case 1: range (10-12TOR)
   if (m[1]) {
     return [m[0], m[1], m[2], m[3]];
@@ -31,14 +29,11 @@ export function extractDiaRegex1(arr) {
   let allMatches = [];
 
   for (const str of arr) {
-    const m = str.match(singleLabelRegex);
-    const normalized = normalizeMatch(m);
+    const normalized = normalizeMatch(str.match(singleLabelRegex));
     if (normalized) {
-      // console.log(normalized);
       allMatches.push(normalized);
     }
   }
 
   return allMatches;
 }
-

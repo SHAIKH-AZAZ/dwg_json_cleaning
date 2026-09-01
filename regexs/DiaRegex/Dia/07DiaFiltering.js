@@ -1,30 +1,17 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import { DiaRegex7V3 } from "../RegexData.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-let count = 0;
-
-const inputPath = path.join(__dirname, "../../cleaned_texts.json");
-const outputPath = path.join(__dirname, "07DiaBar.json");
-const singleLabelRegex =
-  /^(?:(\d+-)\s*)?([TØY]|TOR)\s*(\d+)\s*([-@]\s*\d+(?:\+\d+)*\s*)+(?:\s*mm\s*)?C\/C\b.*$/i;
+// T12-100 mm C/C ... (C/C mandatory, trailing text allowed)
+const singleLabelRegex = DiaRegex7V3;
 
 export function extractDiaRegex7(arr) {
   let allMatches = [];
 
   for (const str of arr) {
-    const match = str.match(singleLabelRegex)
-    if (match) {
-      // console.log(match);
-      count++;
-      // console.log(count)
+    const match = str.match(singleLabelRegex);
+    if (match && match[3]) {
       allMatches.push([...match]);
     }
   }
 
   return allMatches;
 }
-

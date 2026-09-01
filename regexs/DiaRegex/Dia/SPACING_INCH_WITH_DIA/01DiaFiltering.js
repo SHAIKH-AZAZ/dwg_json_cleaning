@@ -1,19 +1,17 @@
+import { DiaInchRegex1V1 } from "../../RegexData.js";
 
-const singleLabelRegex =
-  /^\s*(?:(\d+L)-)?([TØY]|TOR)\s*(\d+)\s*[@-]\s*(\d+)\s*IN\s*(?:C\/C\b.*)?$/i;
-
+// T12-6 IN C/C , 2L-Y10@8 IN C/C
+const singleLabelRegex = DiaInchRegex1V1;
 
 export function extractInchSpacingDia01(arr) {
   let allMatches = [];
 
   for (const str of arr) {
-    const match = str.match(singleLabelRegex)
-    if (match) {
-      count++;
+    const match = str.match(singleLabelRegex);
+    if (match && match[3]) {
       allMatches.push([...match]);
     }
   }
 
   return allMatches;
 }
-

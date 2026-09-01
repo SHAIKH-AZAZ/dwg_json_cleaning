@@ -1,28 +1,20 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+// bbs's dia-parser binds its regex6 slot to DiaRegex6V3, which is a duplicate of
+// DiaRegex4V4 and leaves the 2L-T8-150 form unparsed there. Use bbs's dedicated
+// 2L constant (DiaRegex6V2) instead so this slot keeps its own coverage.
+import { DiaRegex6V2 } from "../RegexData.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-let count =0;
-const inputPath = path.join(__dirname, "../../cleaned_texts.json");
-const outputPath = path.join(__dirname, "06DiaBar.json");
-const singleLabelRegex =
-  /^\s*(\d+L)\s*-\s*([TØY]|TOR)\s*(\d+)(?:[-@]\s*(\d+))?(?:\s*C\/C)?\s*$/i;
-
+// 2L-T8-150
+const singleLabelRegex = DiaRegex6V2;
 
 export function extractDiaRegex6(arr) {
   let allMatches = [];
-  
+
   for (const str of arr) {
-    const match = str.match(singleLabelRegex)
+    const match = str.match(singleLabelRegex);
     if (match) {
-      // console.log(match);
-      count++;
       allMatches.push([...match]);
     }
   }
-  
+
   return allMatches;
 }
-

@@ -1,22 +1,17 @@
-/* This regular expression `const singleLabelRegex =
-/^(?:(\d+)-)?(\d+)(TOR|T|Y|Φ)\s*(?:@|-)?\s*(\d+)\s*IN\s*(?:C\/C)?$/i;` is used to match and extract
-specific patterns from strings. Here is a breakdown of what each part of the regex does: */
-const singleLabelRegex =
-  /^(?:(\d+(?:L)?)-)?(\d+)(TOR|T|Y|Φ)\s*(?:@|-)?\s*(\d+)\s*IN\s*(?:C\/C\b.*)?$/i;
+import { DiaInchRegex2V1 } from "../../RegexData.js";
 
-let count = 0;
+// 12T-6 IN C/C , 2L-16Y@8 IN C/C (dia before symbol)
+const singleLabelRegex = DiaInchRegex2V1;
 
 export function extractInchSpacingDia02(arr) {
   let allMatches = [];
 
   for (const str of arr) {
-    const match = str.match(singleLabelRegex)
-    if (match) {
-      count++;
+    const match = str.match(singleLabelRegex);
+    if (match && match[2]) {
       allMatches.push([...match]);
     }
   }
 
   return allMatches;
 }
-

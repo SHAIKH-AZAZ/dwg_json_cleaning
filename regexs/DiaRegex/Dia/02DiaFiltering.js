@@ -1,8 +1,8 @@
+import { DiaRegex2V2 } from "../RegexData.js";
 
-let count = 0;
+// Count-dia labels like 2-T20 or 3T16, matched anywhere in the string.
+const singleLabelRegex = DiaRegex2V2;
 
-// Exact single count-dia labels like 2-T20 or 3T16.
-const singleLabelRegex = /^(\d+)\s*[-±,]?\s*([YTØ#]|TOR)\s*(\d+)$/;
 /**
  * Extracts labels from an array of strings and flattens into single array
  * @param {string[]} arr - Array of input strings
@@ -13,15 +13,10 @@ export function extractDiaRegex2(arr) {
 
   for (const str of arr) {
     const m = str.match(singleLabelRegex);
-    if (!(m == null)) {
-      // console.log(m);
-      count++;
+    if (m && m[3]) {
       allMatches.push([...m]);
     }
-
-    singleLabelRegex.lastIndex = 0; // reset regex
   }
 
   return allMatches;
 }
-
