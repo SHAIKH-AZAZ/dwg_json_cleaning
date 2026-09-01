@@ -11,7 +11,7 @@ import { parseJsonWithEncodings } from "../utils/parseJsonWithEncodings.js";
 import { sanitizeJsonLikeText } from "../utils/sanitizeJsonLikeText.js";
 
 const fsp = fs.promises;
-const MAX_MEMORY_SIZE = 50 * 1024 * 1024;
+const MAX_MEMORY_SIZE = 75 * 1024 * 1024;
 
 export async function extractFromFileSmall(filePath, failedLog) {
   let data = null;
@@ -54,11 +54,11 @@ export async function extractFromFileSmall(filePath, failedLog) {
 }
 
 export async function extractFromFileLarge(filePath, failedLog) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const texts = [];
     const readStream = fs.createReadStream(filePath, {
       encoding: "utf8",
-      highWaterMark: 64 * 1024
+      highWaterMark: 64 * 1024,
     });
 
     let carry = "";
@@ -68,8 +68,8 @@ export async function extractFromFileLarge(filePath, failedLog) {
       transform(chunk, _, cb) {
         try {
           let str = carry + chunk;
-          carry = str.slice(-50);
-          str = str.slice(0, -50);
+          carry = str.slice(-500);
+          str = str.slice(0, -500);
           str = sanitizeJsonLikeText(str);
           cb(null, str);
         } catch (err) {
@@ -82,7 +82,7 @@ export async function extractFromFileLarge(filePath, failedLog) {
         } catch (err) {
           cb(err);
         }
-      }
+      },
     });
 
     const pipeline = chain([
@@ -90,7 +90,7 @@ export async function extractFromFileLarge(filePath, failedLog) {
       sanitizer,
       parser(),
       pick({ filter: "OBJECTS" }),
-      streamArray()
+      streamArray(),
     ]);
 
     pipeline.on("data", ({ value }) => {
@@ -105,7 +105,7 @@ export async function extractFromFileLarge(filePath, failedLog) {
 
     pipeline.on("end", () => resolve(texts));
 
-    pipeline.on("error", err => {
+    pipeline.on("error", (err) => {
       console.error(`Error streaming ${filePath}: ${err.message}`);
       fs.appendFileSync(failedLog, filePath + "\n", { encoding: "utf8" });
       resolve([]);
@@ -134,15 +134,15 @@ export async function extractTextsFromJsonFolder(
   outArrayPath,
   labelsPath,
   failedLogPath,
-  concurrency = 4
+  concurrency = 4,
 ) {
   if (fs.existsSync(failedLogPath)) fs.unlinkSync(failedLogPath);
 
   const files = await fsp.readdir(jsonDir);
   const jsonFiles = files.filter(
-    n =>
+    (n) =>
       n.toLowerCase().endsWith(".json") &&
-      ![path.basename(outArrayPath), path.basename(labelsPath)].includes(n)
+      ![path.basename(outArrayPath), path.basename(labelsPath)].includes(n),
   );
 
   const outStream = fs.createWriteStream(outArrayPath, { encoding: "utf8" });
@@ -186,10 +186,10 @@ export async function extractTextsFromJsonFolder(
   }
 
   await next();
-  while (active > 0) await new Promise(r => setTimeout(r, 50));
+  while (active > 0) await new Promise((r) => setTimeout(r, 50));
 
   outStream.write("\n]");
-  await new Promise(r => outStream.end(r));
+  await new Promise((r) => outStream.end(r));
 
   await fsp.copyFile(outArrayPath, labelsPath);
   return extractedCount;
