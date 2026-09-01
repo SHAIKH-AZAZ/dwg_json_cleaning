@@ -2,8 +2,19 @@
 //   src/services/parse-dwg/constants/RegexData.ts
 //   src/services/parse-dwg/parsers/dia-parser.ts  (mixedLabelRegex)
 // Keep names identical to the bbs constants so the two repos stay diffable.
+// Deviations from bbs are marked "LOCAL:" - port them back before re-syncing.
 
-export const DiaRegex1V3 = /^(?:(\d+)\s*-\s*(\d+)\s*([YTØ#]|TOR)|(\d+)\s*([YTØ#]|TOR))$/;
+// LOCAL: widened past bbs. bbs anchors this straight to `$`, so a single
+// dia-before-symbol term carrying a trailing annotation - "4-10T (S.F.R)",
+// "4-10T S.F.R" - matched nothing at all: the count-dia-symbol order is only
+// covered here, and every sibling that tolerates a suffix needs either the
+// opposite token order (2V2/3V2), a spacing group (4V4/6V3/7V3), or two
+// "+"-joined terms (DiaMixedLabelRegex). Same tolerance those siblings already
+// grant: an optional bracketed note, then optional whitespace-separated text.
+// Group 6 is appended, so normalizeMatch's m[1]-m[5] are unchanged.
+// ponytail: `(?:\s+.*)?` also swallows genuine junk ("10T RANDOM TEXT"); drop
+// that clause if only the bracketed form should pass.
+export const DiaRegex1V3 = /^\s*(?:(\d+)\s*-\s*(\d+)\s*([YTØ#]|TOR)|(\d+)\s*([YTØ#]|TOR))\s*(?:\(([^)]+)\))?(?:\s+.*)?$/;
 export const DiaRegex2V2 = /\b(\d+)\s*[-±,]?\s*([YTØ#]|TOR)\s*(\d+)\b/;
 export const DiaRegex3V2 = /^(\d+)\s*-?\s*([TØY])\s*(\d+)(?:\(([^)]+)\))?(?:([A-Z]+))?$/;
 export const DiaRegex4V4 = /^(?:(\d+-)\s*)?([TØY]|TOR)\s*(\d+)\s*([-@]\s*\d+(?:\+\d+)*\s*)+(?:C\/C)?(?:\s+.*)?$/i;

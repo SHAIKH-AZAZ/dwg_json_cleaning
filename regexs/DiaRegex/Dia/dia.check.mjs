@@ -33,6 +33,20 @@ assert.equal(hits(extractInchSpacingDia02, "12T-6 IN C/C"), 1);
 // regex2 now matches inside a larger string (bbs behaviour, was anchored before)
 assert.equal(hits(extractDiaRegex2, "BEAM 2-T20 TOP"), 1);
 
+// "4-10T" is count-dia-symbol, so it belongs to regex1, not regex3 (which wants
+// count-symbol-dia, "4T10"). regex1 now also accepts a trailing annotation, and
+// the annotation must not leak into the label - that label is used as a dia key.
+assert.deepEqual(extractDiaRegex1(["4-10T (S.F.R)"]), [["4-10T", "4", "10", "T"]]);
+assert.deepEqual(extractDiaRegex1(["4-10T S.F.R"]), [["4-10T", "4", "10", "T"]]);
+assert.deepEqual(extractDiaRegex1(["4-10T"]), [["4-10T", "4", "10", "T"]]);
+assert.deepEqual(extractDiaRegex1(["10T (S.F.R)"]), [["10T", undefined, "10", "T"]]);
+assert.equal(hits(extractDiaRegex3, "4-10T"), 0);
+
+// widening regex1 must not start eating the spacing forms the later slots own
+assert.equal(hits(extractDiaRegex1, "T12@150C/C"), 0);
+assert.equal(hits(extractDiaRegex1, "2L-T8-150"), 0);
+assert.equal(hits(extractDiaRegex1, "12T-6 IN C/C"), 0);
+
 // mixed labels split into one row per term, in either token order
 assert.deepEqual(extractDiaRegex9(["2-T20+1-T16(ALL)"]), [
   ["2-T20+1-T16(ALL)", "2-T20", "2", "T", "20", "ALL"],
